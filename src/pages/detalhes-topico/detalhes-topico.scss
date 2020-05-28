@@ -1,0 +1,19 @@
+detalhes-topico {
+    .toolbar-background-md {
+        background-color: rgb(113, 89, 193) !important;
+     }
+     .toolbar-title-md {
+       color: white;
+    } 
+
+    #div-principal {
+        width: 98%;
+        margin: 0 auto;
+        margin-top: 1%;
+    }
+
+    ion-content, .cor-texto{
+        color: rgb(113, 89, 193);
+    }
+
+}

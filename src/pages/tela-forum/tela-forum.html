@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title style="text-align: center;">Fórum</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="obterDadosTopicos(null, true)" color="white">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="menuAtualizarDados()" color="white">
+          <ion-icon name="ios-menu"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <!-- puxar e atualizar -->
+  <ion-refresher (ionRefresh)="obterDadosTopicos($event,false)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div style="text-align:center; color: grey;">
+    <br />
+    <!-- exibir foto padrão -->
+    <img class="circle"
+      [src]="((!avatar && sexo == 'F') ? avatarPadraoFeminino : (!avatar && sexo == 'M') ? avatarPadraoMasculino : avatar)">
+    <span *ngIf="sexo == 'M'">
+      <b>
+        <br />Bem-vindo
+        <br />
+      </b>
+      <br />{{nome}}
+      <br />
+    </span>
+    <span *ngIf="sexo == 'F'">
+      <b>
+        <br />Bem-vinda
+        <br />
+      </b>
+      <br />{{nome}}
+      <br />
+    </span>
+  </div>
+  <ion-card (click)="irPara()">
+    <ion-card-header style="color: rgb(113, 89, 193)">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <strong>Dados gerais</strong>
+          </ion-col>
+          <ion-col col-6 class="font-dados">
+            <strong>Entrar</strong>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <hr />
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col col-9>
+          <ion-icon style="font-size: 24px;" name="ios-person-outline"></ion-icon>
+          Usuários
+        </ion-col>
+        <ion-col class="font-dados" col-3 text-right>{{(dadosTopicos.qtdUsuariosCadastrados ? dadosTopicos.qtdUsuariosCadastrados.toLocaleString('pt-BR') : '')}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>
+          <ion-icon name="ios-chatbubbles-outline"></ion-icon>
+          Tópicos
+        </ion-col>
+        <ion-col class="font-dados" col-7 text-right>{{dadosTopicos.qtdTopicos ? dadosTopicos.qtdTopicos.toLocaleString('pt-BR') : ''}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>
+          <ion-icon name="ios-chatbubbles-outline"></ion-icon> Respostas
+        </ion-col>
+        <ion-col class="font-dados" col-7 text-right>{{dadosTopicos.qtdRespostas ? dadosTopicos.qtdRespostas.toLocaleString('pt-BR') : ''}}</ion-col>
+      </ion-row>
+      <ion-row *ngIf="dadosTopicos.nomeUsuario">
+        <ion-col col-5>
+          <ion-icon name="ios-chatbubbles-outline"></ion-icon> Último Tópico
+        </ion-col>
+        <ion-col col-7 class="font-dados">
+          Por: {{dadosTopicos.nomeUsuario}}
+          <p class="font-dados">
+            Em: {{dadosTopicos.dataHoraCadastro | date : "dd/MM/yyyy" }} às
+            {{dadosTopicos.dataHoraCadastro | date : "HH:mm" }}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ion-card>
+  <ion-card (click)="irPara()">
+    <ion-card-content>
+      <div id="div-roda-pe" style="color: grey;">
+        <div style="text-align: justify;">
+          <p>O fórum é uma área para troca de conteúdo e conhecimento entre os profissionais e estudantes das
+            diversas áreas.</p>
+        </div>
+        <hr />
+        <div>
+          <ion-icon name="md-checkbox-outline"></ion-icon> Não ofender os demais usuários.
+        </div>
+        <div>
+          <ion-icon name="md-checkbox-outline"></ion-icon> Não publicar palavras ofensivas.
+        </div>
+        <div>
+          <ion-icon name="md-checkbox-outline"></ion-icon> Adicionar a tag [dúvida], [ajuda] ou [sugestão] no título do tópico.
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

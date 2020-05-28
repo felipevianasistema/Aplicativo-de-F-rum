@@ -1,0 +1,24 @@
+<div style="text-align: right;">
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6 style="text-align: left;">
+        <div *ngIf="imagem.imagemBase64">
+          <ion-icon (click)="limpar()" *ngIf="permitirLimparImagem == true" style="color:firebrick !important; font-size: 24px;" name="close">
+          </ion-icon>
+          <img class="circle" [src]="imagem.imagemBase64" />
+        </div>
+      </ion-col>
+      <ion-col col-6 (click)="presentActionSheet()">
+        <p>
+          <ion-icon style="font-size: 36px;" name="cloud-upload"></ion-icon>
+        </p>
+        <p>
+          {{label}}
+        </p>
+        <p>
+          <small>{{labelDescricao}}</small>
+        </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

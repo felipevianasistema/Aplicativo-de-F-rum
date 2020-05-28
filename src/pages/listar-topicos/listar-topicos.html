@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Tópicos</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="obterTodosPorSubCategoria(null, true)" color="white">
+          <ion-icon name="md-refresh"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content id="filtro">
+  <!-- filtro de pesquisa -->
+  <ion-grid *ngIf="exibirFiltro">
+    <ion-row>
+      <ion-col col-10>
+        <ion-item>
+          <ion-label floating>
+            Filtrar por título
+            <span class="cor-campo-requerido"> *</span>
+          </ion-label>
+          <ion-input type="text" [(ngModel)]="filtro"></ion-input>
+        </ion-item>
+        <span class="msg-validacao">{{filtroValidacao}}</span>
+      </ion-col>
+      <ion-col col-2>
+        <small>
+          <button (click)="pesquisar()" ion-button outline style="height: 50px; width: 50px; bottom: -15px;">
+            <ion-icon style="font-size: 26px;" name="md-search"></ion-icon>
+          </button>
+        </small>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!--conteúdo-->
+  <!-- dados não encontrado -->
+  <div *ngIf="topicos.length == 0" style="text-align: center; color: #efeaea;">
+    <br><br><br><br><br><br>
+    <ion-icon style="font-size: 8em;" text-center name="md-search"></ion-icon>
+    <br>
+    <h3>
+      Nenhum tópico encontrado
+    </h3>
+  </div>
+  <ion-refresher (ionRefresh)="obterTodosPorSubCategoria($event, false)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <span *ngIf="topicos.length > 0">
+    <div style="text-align: center; color:rgb(113, 89, 193);">
+      <br />
+      <strong>{{dsTituloSubCategoria}}</strong>
+      <hr />
+    </div>
+    <ion-list>
+      <ion-item text-wrap *ngFor="let item of topicos">
+        <ion-avatar item-start (click)="ampliarImagem(item.usuario.avatar, item.usuario.dsNome)">
+          <!-- exibir foto padrão -->
+          <img
+            [src]="((!item.usuario.avatar && item.usuario.dsSexo == 'F') ? avatarPadraoFeminino : (!item.usuario.avatar && item.usuario.dsSexo == 'M') ? avatarPadraoMasculino : item.usuario.avatar)">
+        </ion-avatar>
+        <span (click)="detalhesTopico(item.idTopico)">
+          <h2>{{item.dsTitulo}}</h2>
+          <p><b>Autor:</b> {{item.usuario.dsNome}}</p>
+          <p><b>Publicado em:</b> {{item.dtHoraCadastro | date : "dd/MM/yyy"}} às
+            {{item.dtHoraCadastro | date : "HH:mm"}}
+          </p>
+          <span style="float: right; margin-top: -15%;"><br />
+            <ion-badge item-end="" class="badge badge-ios">{{item.resposta.quantidade}}</ion-badge>
+          </span>
+        </span>
+      </ion-item>
+    </ion-list>
+  </span>
+  <ion-fab right bottom style="opacity: 0.9;">
+    <button class="cor-menu-botao" ion-fab color="light">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
+    <ion-fab-list side="left">
+      <button class="cor-menu-botao" ion-fab (click)="exibirOcultarFiltro(); scrollToTop()">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+      <button class="cor-menu-botao" ion-fab (click)="novoTopico()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

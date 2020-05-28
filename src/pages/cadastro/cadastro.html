@@ -1,0 +1,83 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="color: white;">
+      Cadastro
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 17px;">
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="body"></ion-icon>
+        Nome
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input [(ngModel)]="usuario.dsNome" type="text" maxLength="60"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{dsNomeValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="contact"></ion-icon>
+        Usuário
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.dsUsuario" (inputonchange)="usuario.dsUsuario = usuario.dsUsuario.toLowerCase()"
+        maxLength="30"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{dsUsuarioValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="lock"></ion-icon>
+        Senha
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="usuario.dsSenha"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{dsSenhaValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="lock"></ion-icon>
+        Confirmar senha
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="usuario.confirmarSenha"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{confirmarSenhaValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="at"></ion-icon>
+        E-mail
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="text" [(ngModel)]="usuario.dsEmail" maxLength="60"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{dsEmailValidacao}}</span>
+    <br/>
+    <ion-list radio-group [(ngModel)]="usuario.dsSexo">
+      <ion-list-header>
+        Sexo
+      </ion-list-header>
+
+      <ion-item>
+        <ion-label>Masculino</ion-label>
+        <ion-radio value="M"></ion-radio>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Feminino</ion-label>
+        <ion-radio value="F"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <includeImagemUpload label="Imagem do perfil"  labelDescricao="(opcional)" [imagem]="imagem"></includeImagemUpload>
+
+    <br/>
+    <button style="width: 100%;" (click)="cadastrar()" ion-button outline>Cadastrar</button>
+  </div>
+</ion-content>

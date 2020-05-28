@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Categorias</ion-title>
+      <!--corrige o problem de quando centralizava com css, não clicava no voltar-->
+      <ion-buttons end style="visibility: hidden;">
+        <button ion-button icon-only>
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br />
+  <div style="padding: 17px;">
+    <ion-list>
+      <ion-item class="list-left" *ngFor="let categoria of categorias" (click)="avancar(categoria.idCategoria)">
+        <h2>{{categoria.dsTitulo}}</h2>
+        <p>{{categoria.dsSubTitulo}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

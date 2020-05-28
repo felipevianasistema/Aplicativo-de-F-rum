@@ -1,0 +1,127 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Detalhes do Tópico</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="obterConteudoTopico()" color="white">
+          <ion-icon name="md-refresh"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br />
+  <ion-refresher (ionRefresh)="obterConteudoTopico($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div *ngIf="conteudoTopico">
+    <!-- tópico -->
+    <ion-item-group>
+      <ion-item-divider text-wrap color="light" class="cor-texto">
+        <b>Título: </b>{{conteudoTopico.topico.dsTitulo}}</ion-item-divider>
+      <ion-item text-wrap>
+        <div>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                <ion-avatar
+                  (click)="ampliarImagem(conteudoTopico.topico.usuario.avatar, conteudoTopico.topico.usuario.dsNome)">
+                  <!-- exibir foto padrão -->
+                  <img style="width: 40px;"
+                    [src]="(!conteudoTopico.topico.usuario.avatar && conteudoTopico.topico.usuario.dsSexo == 'M' ? avatarPadraoMasculino : (!conteudoTopico.topico.usuario.avatar && conteudoTopico.topico.usuario.dsSexo == 'F') ? avatarPadraoFeminino : conteudoTopico.topico.usuario.avatar)">
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-10>
+                <p>
+                  <b>Autor:</b> {{conteudoTopico.topico.usuario.dsNome}}</p>
+                <p>
+                  <b>Publicado em:</b> {{conteudoTopico.topico.dtHoraCadastro | date : "dd/MM/yyy"}} às {{conteudoTopico.topico.dtHoraCadastro |
+                date : "HH:mm"}}
+                </p>
+                <hr />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <span style="white-space: pre-line !important;" text-wrap>
+            <b>Mensagem: </b> <span [innerHTML]="util.detectarLink(conteudoTopico.topico.dsMensagem)"></span>
+          </span>
+          <!-- botão editar topico, para exibir este botão, o criador do tópico deve ser igual ao do usuário logado -->
+          <div style="text-align: right;" class="cor-texto">
+            <br />
+            <!-- btn editar - Apenas o administrador e o autor, podem editar -->
+            <strong style="color:#42a5f5" (click)="editarTopico()"
+              *ngIf="(idUsuarioLogado == 2 || idUsuarioLogado == conteudoTopico.topico.cdUsuario) && idUsuarioLogado > 1">
+              <ion-icon name="ios-create-outline"></ion-icon>
+              Editar
+            </strong>
+            &nbsp;
+            <!-- btn responder -->
+            <strong (click)="responder()">
+              <ion-icon name="ios-redo-outline"></ion-icon>
+              Responder
+            </strong>
+            &nbsp;
+            <!-- apenas o administrador pode excluir um tópico -->
+            <strong style="color: #dc3545;" (click)="confirmarExclusaoTopico(conteudoTopico.topico.idTopico)" *ngIf="idUsuarioLogado == 2">
+              <ion-icon name="ios-trash-outline"></ion-icon>
+              Excluir
+            </strong>
+          </div>
+        </div>
+      </ion-item>
+    </ion-item-group>
+
+    <!-- resposta -->
+    <hr />
+    <ion-item-group>
+      <ion-item-divider text-wrap color="light" class="cor-texto">
+        <b>Respostas </b> {{conteudoTopico.respostas.length}}
+      </ion-item-divider>
+      <ion-item text-wrap *ngFor="let item of conteudoTopico.respostas">
+        <div>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                <ion-avatar (click)="ampliarImagem(item.usuario.avatar, item.usuario.dsNome)">
+                  <!-- exibir foto padrão -->
+                  <img style="width: 40px;"
+                    [src]="!item.usuario.avatar && item.usuario.dsSexo == 'M' ? avatarPadraoMasculino : !item.usuario.avatar && item.usuario.dsSexo == 'F' ? avatarPadraoFeminino : item.usuario.avatar">
+                </ion-avatar>
+              </ion-col>
+              <ion-col col-10>
+                <p><b>Autor:</b> {{item.usuario.dsNome}}</p>
+                <p><b>Respondido em:</b> {{item.dtHoraCadastro | date : "dd/MM/yyy"}} às
+                  {{item.dtHoraCadastro | date : "HH:mm"}}
+                </p>
+                <hr />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <span text-wrap>
+            <b>Mensagem: </b>
+            <div style="white-space: pre-line !important;">
+              <span [innerHTML]="util.detectarLink(item.dsMensagem)"></span>
+            </div>
+          </span>
+          <!-- botão editar resposta, para exibir este botão, o criador da tópico deve ser igual ao do usuário logado ou o administrador -->
+          <div style="text-align: right;" class="cor-texto"
+            *ngIf="(idUsuarioLogado == 2 || idUsuarioLogado == item.cdUsuario) && idUsuarioLogado > 1">
+            <br />
+            <strong style="color: #42a5f5" (click)="editarResposta(item)">
+              <ion-icon name="ios-create-outline"></ion-icon>
+              Editar
+            </strong>
+            &nbsp;
+            <!-- apenas o administrador pode excluir uma resposta -->
+            <strong style="color: #dc3545;" (click)="confirmarExclusaoResposta(item)" *ngIf="idUsuarioLogado == 2">
+              <ion-icon name="ios-trash-outline"></ion-icon>
+              Excluir
+            </strong>
+          </div>
+        </div>
+      </ion-item>
+    </ion-item-group>
+  </div>
+</ion-content>

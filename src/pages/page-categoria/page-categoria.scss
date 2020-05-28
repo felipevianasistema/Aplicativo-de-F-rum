@@ -1,0 +1,30 @@
+page-categoria {
+    .toolbar-background-md {
+        background-color: rgb(113, 89, 193) !important;
+        }
+        .toolbar-title-md {
+        color: white;
+    } 
+    #div-principal {
+        width: 98%;
+        margin: 0 auto;
+        margin-top: 1%;
+    }
+    ion-content{
+        color: rgb(113, 89, 193);
+    }
+    .list-left{
+        border-left: solid;
+        color: rgb(113, 89, 193);
+        border-left-color: rgb(113, 89, 193);
+        margin-bottom: 8px; 
+    }
+    ion-title{
+        top: 0;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin-left: -3%;
+    }
+}

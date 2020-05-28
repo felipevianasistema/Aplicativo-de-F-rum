@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>{{nome}}</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="viewCtrl.dismiss()" color="white">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div class="img">
+    <img [src]="imagem" style="border-radius: 12px;"/>
+  </div>
+</ion-content>

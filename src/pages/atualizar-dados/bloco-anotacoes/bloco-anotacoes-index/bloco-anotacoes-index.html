@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Minhas Anotações</ion-title>
+      <ion-buttons end>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 12px;">
+    <div style="text-align: center;">
+      Apenas você pode visualizar suas anotações.
+      <hr/>
+    </div>
+    <div *ngIf="!lista.length" style="text-align: center; color: #efeaea;">
+      <br><br><br><br><br><br>
+      <ion-icon style="font-size: 8em;" text-center name="md-search"></ion-icon>
+      <br>
+      <h3>
+        Nenhuma anotação registrada
+      </h3>
+    </div>
+    <ion-card *ngFor="let item of lista" style="border-radius: 7px !important;">
+      <ion-item (click)="exibir(item)">
+        <b>Título: </b> <span>{{item.dsTitulo}}</span>
+        <p>
+          <b>Registrado em:</b> {{item.dtHoraCadastro | date : "dd/MM/yyy"}}
+        </p>
+        <p>
+          <span style="text-overflow: clip ellipsis">{{item.dsMensagem}}</span>
+        </p>
+      </ion-item>
+    </ion-card>
+  </div>
+  <ion-fab right bottom style="opacity: 0.9;">
+      <button class="cor-menu-botao" ion-fab color="light" (click)="novo()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+  </ion-fab>
+</ion-content>

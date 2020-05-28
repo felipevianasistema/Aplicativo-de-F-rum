@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Atualizar senha</ion-title>
+      <ion-buttons end>
+          <button ion-button icon-only (click)="viewCtrl.dismiss()" color="white">
+              <ion-icon name="md-close"></ion-icon>
+          </button>
+      </ion-buttons>
+    </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
+
+<ion-content>
+  <div style="padding: 12px;">
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="lock"></ion-icon>
+        Senha atual
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="atualizarSenha.senhaAtual"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{senhaAtualValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="lock"></ion-icon>
+        Nova senha
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="atualizarSenha.novaSenha"></ion-input>
+    </ion-item>
+    <span class="msg-validacao">{{novaSenhaValidacao}}</span>
+
+    <ion-item>
+      <ion-label floating>
+        <ion-icon text-left name="lock"></ion-icon>
+        Repetir nova senha
+        <span class="cor-campo-requerido"> *</span>
+      </ion-label>
+      <ion-input type="password" [(ngModel)]="repetirNovaSenha"></ion-input>
+    </ion-item>
+    <br/>
+
+    <button style="width: 100%;" ion-button outline (click)="atualizar()">Atualizar</button>
+  </div>
+</ion-content>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="color: white;">
+      {{dsTitulo}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br/>
+  <div style="padding: 17px;">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input maxLength="80" type="text" [(ngModel)]="topico.dsTitulo"></ion-input>
+      </ion-item>
+      <span class="msg-validacao">{{dsTituloValidacao}}</span>
+
+      <ion-item>
+        <ion-label floating>Mensagem</ion-label>
+        <ion-textarea (input)="util.autoResizeTextArea($event);" maxLength="2000" (ionChange)="contadorDeCaracteres()" type="text" [(ngModel)]="topico.dsMensagem"></ion-textarea>
+      </ion-item>
+      <span class="msg-validacao">{{dsMensagemValidacao}}</span>
+    </ion-list>
+    <div text-right>
+      {{qtdCaracteres}}/2000
+    </div>
+    <br/>
+    <button *ngIf="opcao != 'E'" style="width: 100%;" (click)="cadastrar()" ion-button outline>Cadastrar</button>
+    <button *ngIf="opcao == 'E'" style="width: 100%;" (click)="editar()" ion-button outline>ok</button>
+  </div>
+  <div style="white-space: pre-line !important; padding: 15px;" >
+    <p style="color: rgb(113, 89, 193)"><b>Pré-Visualização da mensagem</b></p>
+    {{topico.dsMensagem}}
+  </div>
+</ion-content>

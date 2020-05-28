@@ -1,0 +1,7 @@
+{
+  "name": "termos_recnicos_enfermagem",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

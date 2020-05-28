@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-toolbar>
+      <ion-title>Novo Bloco de Anotações</ion-title>
+      <ion-buttons end>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br/>
+  <div style="padding: 17px;">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Título</ion-label>
+        <ion-input maxLength="80" type="text" [(ngModel)]="blocoAnotacao.dsTitulo"></ion-input>
+      </ion-item>
+      <span class="msg-validacao">{{dsTituloValidacao}}</span>
+
+      <ion-item>
+        <ion-label floating>Mensagem</ion-label>
+        <ion-textarea (input)="util.autoResizeTextArea($event);" maxLength="3000" (ionChange)="contadorDeCaracteres()" type="text" [(ngModel)]="blocoAnotacao.dsMensagem"></ion-textarea>
+      </ion-item>
+      <span class="msg-validacao">{{dsMensagemValidacao}}</span>
+    </ion-list>
+    <div text-right>
+      {{qtdCaracteres}}/3000
+    </div>
+    <br/>
+    <button *ngIf="opcao == 'N'" style="width: 100%;" (click)="cadastrar()" ion-button outline>Cadastrar</button>
+    <button *ngIf="opcao == 'E'" style="width: 100%;" ion-button outline (click)="atualizar()">Atualizar</button>
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+listar-topicos {
+    .toolbar-background-md {
+        background-color: rgb(113, 89, 193) !important;
+     }
+     .toolbar-title-md {
+       color: white;
+    } 
+    ion-content{
+        color: rgb(113, 89, 193);
+    }
+    .cor-menu-botao {
+        background-color: rgb(113, 89, 193);
+        color: white;
+    }
+    ion-title{
+        top: 0;
+        left: 0px;
+        padding: 2px 95px 2px;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        margin-left: -3%;
+    }
+}

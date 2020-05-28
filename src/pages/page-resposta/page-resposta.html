@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="color: white;">
+      {{dsTitulo}}
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br/>
+  <div style="padding: 17px;">
+    <ion-list>
+
+      <ion-item>
+        <ion-label floating>Mensagem</ion-label>
+        <ion-textarea (input)="util.autoResizeTextArea($event);" maxLength="2000" (ionChange)="contadorDeCaracteres()" type="text" [(ngModel)]="resposta.dsMensagem"></ion-textarea>
+      </ion-item>
+      <span class="msg-validacao">{{dsMensagemValidacao}}</span>
+    </ion-list>
+    <div text-right>
+      {{qtdCaracteres}}/2000
+    </div>
+    <br/>
+    <!-- btn responder -->
+    <button *ngIf="opcao == 'R'" style="width: 100%;" (click)="responder()" ion-button outline>ok</button>
+    <!-- btn editar resposta -->
+    <button *ngIf="opcao == 'E'" style="width: 100%;" (click)="editar()" ion-button outline>ok</button>
+  </div>
+  <div style="white-space: pre-line; padding: 15px;" >
+    <p style="color: rgb(113, 89, 193)"><b>Pré-Visualização da mensagem</b></p>
+    {{resposta.dsMensagem}}
+  </div>
+</ion-content>

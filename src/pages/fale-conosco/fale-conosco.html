@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="color: white;">
+      Fale Conosco
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br/>
+  <div style="padding: 17px;">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>
+          Assunto
+          <span class="cor-campo-requerido"> *</span>
+        </ion-label>
+        <ion-input maxLength="100" [(ngModel)]="contato.assunto" type="text"></ion-input>
+      </ion-item>
+      <span class="msg-validacao">{{dsAssuntoValidacao}}</span>
+
+      <ion-item>
+          <ion-label floating>
+            Seu e-mail
+            <span class="cor-campo-requerido"> *</span>
+          </ion-label>
+          <ion-input [(ngModel)]="contato.emailRemetente" type="text"></ion-input>
+        </ion-item>
+        <span class="msg-validacao">{{dsEmailRemetenteValidacao}}</span>
+
+      <ion-item>
+        <ion-label floating>
+          Mensagem
+          <span class="cor-campo-requerido"> *</span>
+        </ion-label>  
+        <ion-textarea (input)="util.autoResizeTextArea($event);" type="text" [(ngModel)]="contato.mensagem"></ion-textarea>
+      </ion-item>
+      <span class="msg-validacao">{{dsMensagemValidacao}}</span>
+    </ion-list>
+    <br/>
+    <button style="width: 100%;" ion-button outline (click)="enviar()">Enviar</button>
+    <br/>
+    <br/>
+    <div style="color: grey;">
+      <ion-icon name="md-checkbox-outline"> Sugestões.</ion-icon>
+      <br/>
+      <ion-icon name="md-checkbox-outline"> Reclamações.</ion-icon>
+      <br/>
+      <ion-icon name="md-checkbox-outline"> Relatar problema.</ion-icon>
+      <br/>
+      <ion-icon name="md-checkbox-outline"> Dúvidas relacionadas ao aplicativo.</ion-icon>
+      <br/>
+      <ion-icon name="md-checkbox-outline"> Responderemos para o e-mail informado.</ion-icon>
+      <br/>
+      <hr/>
+      O aplicativo possui conteúdo de terceiros, se você for o autor e a publicação não for permitida favor entrar em 
+      contato solicitando a remoção.
+    </div>
+  </div>
+</ion-content>

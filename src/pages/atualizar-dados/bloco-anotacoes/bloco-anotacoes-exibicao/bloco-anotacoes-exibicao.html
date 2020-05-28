@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+  <ion-toolbar>
+    <ion-title>Anotação</ion-title>
+  </ion-toolbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div style="padding: 12px;">
+    <h4>
+      <span [innerHTML]="blocoAnotacao.dsTitulo"></span>
+    </h4>
+    <hr/>
+    <span style="white-space: pre-line !important;" [innerHTML]="util.detectarLink(blocoAnotacao.dsMensagem)"></span>
+  </div>
+  <ion-fab right bottom style="opacity: 0.9;">
+    <button class="cor-menu-botao" ion-fab color="light">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
+    <ion-fab-list side="left">
+      <button class="cor-menu-botao" ion-fab (click)="editar()">
+        <ion-icon name="md-create"></ion-icon>
+      </button>
+      <button class="cor-menu-botao" ion-fab (click)="confirmacaoExcluir()">
+        <ion-icon name="md-trash"></ion-icon>
+      </button>
+      <button class="cor-menu-botao" ion-fab (click)="novo()">
+        <ion-icon name="md-add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
